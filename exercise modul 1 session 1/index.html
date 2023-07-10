@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Email dan Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="global-container">
+      <div class="card login-form">
+        <div class="card-body">
+          <h1 class="text-center mt-5">L O G I N</h1>
+        </div>
+        <div class="card-text">
+          <form onsubmit="validateForm(event)">
+            <div class="mb-3">
+              <label for="floatingInput">Email address</label>
+              <input type="email" name="email" class="form-control" id="email" />
+              <span id="emailError" class="error-message"></span>
+            </div>
+            <div class="mb-3">
+              <label for="floatingPassword">Password</label>
+              <input type="password" name="password" class="form-control" id="password" />
+              <span id="passwordError" class="error-message"></span>
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary mb-3">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function validateForm(event) {
+        event.preventDefault(); // Menghentikan submit form
+
+        // Mengambil nilai input email dan password
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        // Menghapus pesan error sebelum validasi
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+
+        // Validasi email
+        if (!validateEmail(email)) {
+          document.getElementById("emailError").textContent = "Email tidak valid";
+          return;
+        }
+
+        // Validasi password
+        if (!validatePassword(password)) {
+          document.getElementById("passwordError").textContent = "Password minimal 8 karakter";
+          return;
+        }
+
+        // Jika validasi berhasil, bisa melakukan pengiriman data atau tindakan lainnya
+        alert("Form berhasil di-submit");
+        document.getElementById("myForm").reset(); // Reset form
+      }
+
+      function validateEmail(email) {
+        // RegEx untuk validasi email
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+      }
+
+      function validatePassword(password) {
+        return password.length >= 8;
+      }
+    </script>
+  </body>
+</html>
